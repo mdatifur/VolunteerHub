@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VolunteerHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <aside id="side" aria-label="Main navigation">
+    <div class="brand">VolunteerHub</div>
+    <nav id="nav">
+      <button data-p="dashboard">▦ Dashboard</button><button data-p="volunteers">☺ All Volunteers</button><button
+        data-p="routines">▤ Class Routines</button><button data-p="finder">⌕ Availability Finder</button><button
+        data-p="events">◷ Events</button><button data-p="settings">⚙ Settings</button>
+    </nav>
+  </aside>
+  <div id="shell">
+    <header class="top"><button id="menu" aria-label="Menu">☰</button>
+      <h1 id="title">Dashboard</h1><span id="conn" class="badge b-Pending" role="status">Checking
+        connection…</span><button id="so" class="sm" hidden>Sign out</button>
+    </header>
+    <main>
+      <section data-page="dashboard">
+        <div class="stats" id="stats"></div>
+        <div class="card">
+          <h2>Upcoming events</h2>
+          <div id="upcoming"></div>
+        </div>
+      </section>
+
+      <section data-page="volunteers">
+        <div class="bar"><input id="q" type="search" placeholder="Search name or phone" aria-label="Search"><select
+            id="fs" aria-label="Filter status">
+            <option value="">All statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select><button class="pri" id="addV">+ Add volunteer</button></div>
+        <div class="card tw" id="vtable"></div>
+      </section>
+
+      <section data-page="routines">
+        <div class="bar"><button class="pri" id="imp">Import from screenshots</button><button id="impA">Scan
+            already-attached screenshots</button><input type="file" id="fimp" accept="image/*" multiple hidden></div>
+        <div class="card tw" id="rtable"></div>
+      </section>
+
+      <section data-page="finder">
+        <div class="card">
+          <form id="ff" class="grid"><label>Date<input type="date" id="fd" required></label><label>Start time<input
+                type="time" id="fst" required></label><label>End time<input type="time" id="fet"
+                required></label><label>Volunteers needed<input type="number" id="fn" min="1"
+                value="3"></label><label>Buffer (minutes)<input type="number" id="fb" min="0" step="5"
+                value="0"></label><button class="pri" type="submit">Find Available Volunteers</button></form>
+          <p id="ferr" class="err" role="alert"></p>
+        </div>
+        <div id="fres"></div>
+      </section>
+
+      <section data-page="events">
+        <div class="bar"><button class="pri" id="addE">+ Add event</button></div>
+        <div id="elist"></div>
+      </section>
+
+      <section data-page="settings">
+        <div class="card">
+          <h2>Data</h2>
+          <p class="muted">Data is stored in your Supabase online database and is shared by every device where you sign
+            in as admin.</p>
+          <div class="row">
+            <button id="xj">Export JSON</button><button id="ij">Import JSON</button><button id="xc">Export volunteers
+              CSV</button><button id="ic">Import CSV (Google Form sheet)</button><button id="mig">Migrate data from this
+              browser</button><button class="danger" id="rs">Reset demo data</button>
+          </div>
+          <input type="file" id="fj" accept=".json" hidden><input type="file" id="fc" accept=".csv" hidden>
+          <p class="muted">CSV columns: Timestamp, Full Name, Phone, Address, Upload Your Class Time Screenshot. Google
+            Sheets is not connected; export the sheet as CSV and import it here. Imported screenshot links are never
+            treated as verified routines.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <dialog id="dlg"></dialog>
+  <dialog id="cf">
+    <form method="dialog">
+      <p id="cfm"></p>
+      <div class="row end"><button value="n">Cancel</button><button class="danger" value="y" id="cfy">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+  <div id="toasts" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="seed.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
